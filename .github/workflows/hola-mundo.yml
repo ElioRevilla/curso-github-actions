@@ -1,19 +1,13 @@
-name: Hola Mundo  # Nombre del workflow mostrado en la pestaña Actions
-
-on:  # Eventos que disparan este workflow
-  push:  # Ejecuta el workflow cuando se hace push
-    branches: [ aprendiendo-github-actions ]  # Solo para la rama "aprendiendo-github-actions"
-
-jobs:  # Colección de trabajos que se ejecutan (pueden ser paralelos)
-  run-main:  # Identificador del job
-    runs-on: ubuntu-latest  # Runner (SO) donde se ejecutará el job
-    steps:  # Lista de pasos que componen el job
-      - uses: actions/checkout@v4  # Clona el repositorio en el runner
-
-      - name: Set up Python  # Paso para preparar el entorno Python
-        uses: actions/setup-python@v4  # Acción oficial que instala Python
-        with:  # Parámetros para la acción `setup-python`
-          python-version: '3.11'  # Versión menor de Python a instalar
-
-      - name: Run main.py  # Paso que ejecuta el script de ejemplo
-        run: python main.py  # Comando que ejecuta `main.py` en el runner
+name: Aprendiendo GitHub Actions
+run-name: ¡Estoy aprendiendo GitHub Actions!
+on: [push]
+jobs:
+  hola-mundo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Definir variable
+        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
+      - name: Correr script
+        run: python hola_mundo.py
